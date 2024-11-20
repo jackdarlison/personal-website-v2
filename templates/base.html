@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/static/main.css" >
+    
+    <title>{% block title %}{{title}}{% endblock title %}</title>
+
+    {% block head %} {% endblock head %}
+  </head>
+
+  <body>
+    <div>{% block content %} {% endblock content %}</div>
+  </body>
+</html>
