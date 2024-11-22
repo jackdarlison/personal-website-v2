@@ -1,14 +1,26 @@
 <!doctype html>
-<html lang="en">
+<html data-theme="forest" lang="en">
   <head>
     <link rel="stylesheet" href="/static/main.css" >
-    
-    <title>{% block title %}{{title}}{% endblock title %}</title>
+
+    <title>{% block title %}{% endblock title %}</title>
 
     {% block head %} {% endblock head %}
   </head>
 
   <body>
-    <div>{% block content %} {% endblock content %}</div>
+
+    {% include "components/tablist.html" %}
+
+    {% block pre_content %}{% endblock pre_content %}
+
+    <div class="max-w-2xl container mx-auto">
+        {% block content %}{% endblock content %}
+    </div>
   </body>
+    
+   {% block post_content %}{% endblock post_content %}
+
+  {% include "components/footer.html" %}
+
 </html>

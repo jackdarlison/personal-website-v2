@@ -1,6 +1,6 @@
 use anyhow::Ok;
 use axum::{routing::get, Router};
-use routes::home::home;
+use routes::{blog::blog, home::home};
 use tower_http::services::ServeDir;
 
 mod routes;
@@ -12,6 +12,7 @@ async fn main() -> anyhow::Result<()> {
 
     let router = Router::new()
         .route("/", get(home))
+        .route("/blog", get(blog))
         .nest("api/", api_router)
         .nest_service("/static", ServeDir::new("static"));
 
