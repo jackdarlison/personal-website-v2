@@ -1,7 +1,11 @@
 use std::sync::Arc;
 
 use askama::Template;
-use axum::{extract::{Path, State}, http::StatusCode, response::IntoResponse};
+use axum::{
+    extract::{Path, State},
+    http::StatusCode,
+    response::IntoResponse,
+};
 use sqlx::{prelude::FromRow, types::time::Date};
 
 #[derive(Template, FromRow, Debug, Clone)]
@@ -12,9 +16,10 @@ pub(crate) struct PostTemplate {
     post_body: String,
 }
 
-
-pub(crate) async fn post(Path(title): Path<String>, State(state): State<Arc<Vec<PostTemplate>>>) -> impl IntoResponse  {
-
+pub(crate) async fn post(
+    Path(title): Path<String>,
+    State(state): State<Arc<Vec<PostTemplate>>>,
+) -> impl IntoResponse {
     let post: Option<&PostTemplate> = state.iter().filter(|post| post.post_title == title).next();
 
     match post {

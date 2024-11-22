@@ -3,7 +3,11 @@ use std::{env, sync::Arc};
 use anyhow::Ok;
 use axum::{routing::get, Router};
 use dotenvy::dotenv;
-use routes::{blog::blog, home::home, post::{post, PostTemplate}};
+use routes::{
+    blog::blog,
+    home::home,
+    post::{post, PostTemplate},
+};
 use sqlx::postgres::PgPoolOptions;
 use tower_http::services::ServeDir;
 
@@ -11,7 +15,6 @@ mod routes;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    
     dotenv().expect("Cannot read .env file");
 
     let db_url = env::var("DB_URL").expect("DB_URL environment variable not found!");
@@ -21,11 +24,18 @@ async fn main() -> anyhow::Result<()> {
         .connect(&db_url)
         .await?;
 
-    let posts = sqlx::query_as::<_, PostTemplate>("SELECT post_title, post_date, post_body FROM myposts")
-        .fetch_all(&pool)
-        .await?;
+    let posts =
+        sqlx::query_as::<_, PostTemplate>("SELECT post_title, post_date, post_body FROM myposts")
+            .fetch_all(&pool)
+            .await?;
 
-    println!("Found posts: {:?}", posts.iter().map(|p| p.post_title.as_str()).collect::<Vec<&str>>());
+    println!(
+        "Found posts: {:?}",
+        posts
+            .iter()
+            .map(|p| p.post_title.as_str())
+            .collect::<Vec<&str>>()
+    );
 
     let state = Arc::new(posts);
 

@@ -1,19 +1,23 @@
-use std::{env, fs::{self}};
+use std::{
+    env,
+    fs::{self},
+};
 
 use dotenvy::dotenv;
 use sqlx::postgres::PgPoolOptions;
 
-
 #[tokio::main]
 async fn main() {
-
     dotenv().expect("Cannot read .env file");
 
     let db_url = env::var("DB_URL").expect("DB_URL environment variable not found!");
 
     let args: Vec<String> = env::args().collect();
 
-    assert!(args.len() == 3, "Command should be in format 'cmd <title> <path/to/content>'");
+    assert!(
+        args.len() == 3,
+        "Command should be in format 'cmd <title> <path/to/content>'"
+    );
 
     let body: String = fs::read_to_string(&args[2]).expect(&format!("Could not read {}", &args[2]));
 

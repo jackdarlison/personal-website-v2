@@ -1,8 +1,6 @@
 use std::process::Command;
 
-
 fn main() {
-
     println!("Running build Script");
 
     let output = Command::new("pnpm")
