@@ -5,16 +5,24 @@
 {% block content %}
 
 <div class="prose">
-    It's Blogging time
 
+    <h1> Blog. </h1>
 
-    <ul>
-        {% for title in titles %}
-        <li>
-            <a href="/post/{{ title }}">{{ title }}</a>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="text-lg">
+        Here you can find a collection of my projects and thoughts. Feel free to search for something specific:
+
+        <input class="form-control" type="search" 
+        name="contains" placeholder="Filter Posts..." 
+        hx-post="/post_list" 
+        hx-trigger="input changed delay:100ms, search, load" 
+        hx-target="#search-results" 
+        hx-indicator=".htmx-indicator">
+        <div class="htmx-indicator text-xl text-primary">...</div>
+
+        It's Blogging time!
+    </div>
+
+    <div id="search-results"></div>
 
 </div>
 

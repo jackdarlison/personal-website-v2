@@ -1,33 +1,17 @@
-use std::{env, sync::Arc};
+use std::sync::Arc;
 
 use anyhow::Ok;
 use axum::{routing::get, Router};
-use dotenvy::dotenv;
-use routes::{
-    blog::blog,
-    home::home,
-    post::{post, PostTemplate},
-};
-use sqlx::postgres::PgPoolOptions;
+use routes::{blog::blog, home::home, post::post, post_list::post_list};
 use tower_http::services::ServeDir;
+use utils::blog::get_posts;
 
 mod routes;
+mod utils;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    dotenv().expect("Cannot read .env file");
-
-    let db_url = env::var("DB_URL").expect("DB_URL environment variable not found!");
-
-    let pool = PgPoolOptions::new()
-        .max_connections(3)
-        .connect(&db_url)
-        .await?;
-
-    let posts =
-        sqlx::query_as::<_, PostTemplate>("SELECT post_title, post_date, post_body FROM myposts")
-            .fetch_all(&pool)
-            .await?;
+    let posts = get_posts().await?;
 
     println!(
         "Found posts: {:?}",
@@ -45,6 +29,7 @@ async fn main() -> anyhow::Result<()> {
         .route("/", get(home))
         .route("/blog", get(blog))
         .route("/post/:title", get(post))
+        .route("/post_list", axum::routing::post(post_list))
         .nest("api/", api_router)
         .nest_service("/static", ServeDir::new("static"))
         .with_state(state);

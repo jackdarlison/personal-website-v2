@@ -3,16 +3,12 @@ use std::sync::Arc;
 use askama::Template;
 use axum::{extract::State, response::IntoResponse};
 
-use super::post::PostTemplate;
+use crate::utils::post::Post;
 
 #[derive(Template)]
 #[template(path = "pages/blog.html")]
-struct BlogTemplate {
-    titles: Vec<String>,
-}
+struct BlogTemplate {}
 
-pub(crate) async fn blog(State(state): State<Arc<Vec<PostTemplate>>>) -> impl IntoResponse {
-    let titles: Vec<String> = state.iter().map(|p| p.post_title.clone()).collect();
-
-    BlogTemplate { titles }
+pub(crate) async fn blog() -> impl IntoResponse {
+    BlogTemplate {}
 }

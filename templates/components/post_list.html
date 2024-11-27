@@ -1,0 +1,27 @@
+    
+<div class="grid grid-cols-3 gap-4 my-8">
+
+    {% for post in posts %}
+
+    <a class="card card-compact bg-neutral text-neutral-content no-underline shadow-xl transition-all hover:-translate-y-4" href="/post/{{ post.post_title }}">
+
+        <div class="card-body">
+
+            <h2 class="card-title">
+                {{ post.post_title }}
+            </h2>
+
+            <p>
+                {{ post.post_date }}
+            </p>
+
+            <div class="card-actions justify-end">
+                <div class="badge badge-accent">Test</div>
+            </div>
+
+        </div>
+    </a>
+
+    {% endfor %}
+
+</div> 
