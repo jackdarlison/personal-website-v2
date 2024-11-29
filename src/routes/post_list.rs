@@ -1,13 +1,11 @@
-use std::sync::Arc;
 
 use askama::Template;
 use axum::{
-    extract::{Form, State},
-    response::IntoResponse,
+    extract::Form, http::StatusCode, response::IntoResponse
 };
 use serde::Deserialize;
 
-use crate::utils::post::Post;
+use crate::utils::{blog::get_posts, post::Post};
 
 #[derive(Template)]
 #[template(path = "components/post_list.html")]
@@ -21,14 +19,18 @@ pub struct PostListForm {
 }
 
 pub async fn post_list(
-    State(state): State<Arc<Vec<Post>>>,
     Form(search): Form<PostListForm>,
 ) -> impl IntoResponse {
-    let posts: Vec<Post> = state
-        .iter()
-        .filter(|p| p.title.contains(&search.contains))
-        .cloned()
-        .collect();
 
-    PostListTemplate { posts }.into_response()
+    let db_response = get_posts().await;
+
+    let Ok(posts) = db_response else {
+        return (StatusCode::INTERNAL_SERVER_ERROR, "Cannot find posts").into_response();
+    };
+
+    PostListTemplate {
+        posts: posts.into_iter()
+            .filter(|p| p.title.contains(&search.contains))
+            .collect()
+    }.into_response()
 }

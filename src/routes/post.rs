@@ -8,7 +8,7 @@ use axum::{
 };
 use sqlx::types::time::Date;
 
-use crate::utils::post::Post;
+use crate::utils::{blog::get_posts, post::Post};
 
 #[derive(Template)]
 #[template(path = "pages/post.html")]
@@ -30,14 +30,20 @@ impl Into<PostTemplate> for Post {
 
 pub(crate) async fn post(
     Path(title): Path<String>,
-    State(state): State<Arc<Vec<Post>>>,
 ) -> impl IntoResponse {
-    let post: Option<&Post> = state.iter().filter(|post| post.title == title).next();
+
+    let db_response = get_posts().await;
+
+    let Ok(posts) = db_response else { 
+        return (StatusCode::INTERNAL_SERVER_ERROR, "Cannot find posts").into_response()
+    };
+
+    let post: Option<Post> = posts.into_iter().filter(|post| post.title == title).next();
 
     match post {
         None => (StatusCode::NOT_FOUND, "404 not found").into_response(),
         Some(p) => {
-            let post_template: PostTemplate = p.clone().into();
+            let post_template: PostTemplate = p.into();
             post_template.into_response()
         }
     }

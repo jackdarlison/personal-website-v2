@@ -4,24 +4,18 @@ use anyhow::Ok;
 use axum::{routing::get, Router};
 use routes::{blog::blog, home::home, post::post, post_list::post_list};
 use tower_http::services::ServeDir;
-use utils::blog::get_posts;
+use utils::blog::{generate_posts, get_posts};
 
 mod routes;
 mod utils;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let posts = get_posts().await?;
 
-    println!(
-        "Found posts: {:?}",
-        posts
-            .iter()
-            .map(|p| p.title.as_str())
-            .collect::<Vec<&str>>()
-    );
-
-    let state = Arc::new(posts);
+    // if we have no posts, generate from the posts directory
+    if get_posts().await?.is_empty() {
+        generate_posts().await?;
+    }
 
     let api_router = Router::new();
 
@@ -31,8 +25,7 @@ async fn main() -> anyhow::Result<()> {
         .route("/post/:title", get(post))
         .route("/post_list", axum::routing::post(post_list))
         .nest("api/", api_router)
-        .nest_service("/static", ServeDir::new("static"))
-        .with_state(state);
+        .nest_service("/static", ServeDir::new("static"));
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await?;
 

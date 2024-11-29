@@ -4,6 +4,8 @@ use sqlx::postgres::PgPoolOptions;
 
 use crate::utils::post::Post;
 
+use super::str::name_to_title;
+
 static DB_URL: OnceLock<String> = OnceLock::new();
 
 fn fetch_db_url() -> String {
@@ -42,4 +44,17 @@ pub async fn get_posts() -> anyhow::Result<Vec<Post>> {
         .await?;
 
     Ok(posts)
+}
+
+pub async fn generate_posts() -> anyhow::Result<()> {
+
+    for file in fs::read_dir("posts")? {
+        let post = file?;
+
+        let name = name_to_title(post.file_name());
+
+        add_post_to_db(&name, post.path().to_str().expect("Path invalid str")).await?;
+    }
+
+    Ok(())
 }
