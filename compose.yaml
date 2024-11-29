@@ -1,0 +1,22 @@
+services:
+  website:
+    build: 
+      context: .
+      dockerfile: dockerfile
+    environment:
+      DB_URL: "${DB_URL}"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    build:
+      context: .
+      dockerfile: dockerfile.postgres
+    environment:
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_DB: "${DB_NAME}"
+    ports:
+      - "5432:5432"

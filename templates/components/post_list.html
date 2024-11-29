@@ -3,16 +3,16 @@
 
     {% for post in posts %}
 
-    <a class="card card-compact bg-neutral text-neutral-content no-underline shadow-xl transition-all hover:-translate-y-4" href="/post/{{ post.post_title }}">
+    <a class="card card-compact bg-neutral text-neutral-content no-underline shadow-xl transition-all hover:-translate-y-4" href="/post/{{ post.title }}">
 
         <div class="card-body">
 
             <h2 class="card-title">
-                {{ post.post_title }}
+                {{ post.title }}
             </h2>
 
             <p>
-                {{ post.post_date }}
+                {{ post.date }}
             </p>
 
             <div class="card-actions justify-end">

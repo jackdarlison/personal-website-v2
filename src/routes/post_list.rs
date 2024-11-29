@@ -26,7 +26,7 @@ pub async fn post_list(
 ) -> impl IntoResponse {
     let posts: Vec<Post> = state
         .iter()
-        .filter(|p| p.post_title.contains(&search.contains))
+        .filter(|p| p.title.contains(&search.contains))
         .cloned()
         .collect();
 
