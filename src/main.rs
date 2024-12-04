@@ -1,4 +1,4 @@
-use std::sync::Arc;
+use std::{env, sync::Arc};
 
 use anyhow::Ok;
 use axum::{routing::get, Router};
@@ -27,7 +27,9 @@ async fn main() -> anyhow::Result<()> {
         .nest("api/", api_router)
         .nest_service("/static", ServeDir::new("static"));
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await?;
+    let port = env::var("WEBSITE_PORT")?;
+
+    let listener = tokio::net::TcpListener::bind(format!("0.0.0.0:{}", port)).await?;
 
     println!("Listening on {}", listener.local_addr()?);
 

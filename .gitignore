@@ -4,3 +4,6 @@
 .env
 /posts
 /app
+
+*.tar
+*.tar.gz

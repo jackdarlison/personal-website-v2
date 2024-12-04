@@ -1,19 +1,18 @@
 services:
   website:
-    build: 
-      context: .
-      dockerfile: dockerfile
+    image:
+      website
     environment:
       DB_URL: "${DB_URL}"
+      WEBSITE_PORT: ${WEBSITE_PORT}
     ports:
-      - "8080:8080"
+      - "${WEBSITE_PORT}:${WEBSITE_PORT}"
     depends_on:
       - db
 
   db:
-    build:
-      context: .
-      dockerfile: dockerfile.postgres
+    image: 
+      db
     environment:
       POSTGRES_USER: "${DB_USER}"
       POSTGRES_PASSWORD: "${DB_PASSWORD}"
