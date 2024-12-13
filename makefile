@@ -5,9 +5,10 @@ AWS_URL=ubuntu@ec2-3-9-146-191.eu-west-2.compute.amazonaws.com
 AWS_KEY=~/certs/aws-personal-website.pem
 
 build_and_deploy_local: build
+	docker-compose down || true
 	docker-compose up
 
-build_and_deploy: build deploy
+build_and_deploy: build save deploy
 
 deploy:
 	ssh -i $(AWS_KEY) $(AWS_URL) "mkdir -p ~/website/"
@@ -21,10 +22,12 @@ build: tailwind
 	mkdir -p app
 	docker build -f dockerfile.website -t website .
 	docker build -f dockerfile.db -t db .
+
+save:
 	docker save -o website.tar website
 	docker save -o db.tar db
-	gzip website.tar
-	gzip db.tar
+	gzip -f website.tar
+	gzip -f db.tar
 
 tailwind:
 	pnpm dlx tailwindcss -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT)

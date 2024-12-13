@@ -7,5 +7,5 @@ pub fn name_to_title(name: OsString) -> String {
 
     let name = name.split('.').next().expect("No file name");
 
-    name.to_lowercase().replace("_", " ")
+    name.replace("_", " ")
 }

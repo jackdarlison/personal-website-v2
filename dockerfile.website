@@ -27,8 +27,10 @@ FROM ubuntu:24.04
 WORKDIR /app
 COPY /static /app/static
 COPY --from=builder /app/target/release/website .
+COPY --from=builder /app/target/release/blog_util .
 COPY /posts /app/posts
 
-EXPOSE 8080
+EXPOSE 80
+EXPOSE 443
 
 ENTRYPOINT [ "./website" ]

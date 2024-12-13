@@ -4,9 +4,11 @@ services:
       website
     environment:
       DB_URL: "${DB_URL}"
-      WEBSITE_PORT: ${WEBSITE_PORT}
+      HTTP_ONLY: "${HTTP_ONLY}"
+      EMAIL: "${EMAIL}"
     ports:
-      - "${WEBSITE_PORT}:${WEBSITE_PORT}"
+      - "80:80"
+      - "443:443"
     depends_on:
       - db
 

@@ -1,7 +1,11 @@
 /target
 /node_modules
+
 /static/main.css
+/static/images
+
 .env
+
 /posts
 /app
 
