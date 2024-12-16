@@ -9,19 +9,20 @@
     {% block head %} {% endblock head %}
   </head>
 
-  <body>
+  <body class="container mx-auto max-w-full md:max-w-3xl px-4 md:px-8" >
 
     {% include "components/tablist.html" %}
 
     {% block pre_content %}{% endblock pre_content %}
 
-    <div class="container mx-auto prose">
+    <div class="">
         {% block content %}{% endblock content %}
     </div>
-  </body>
     
-   {% block post_content %}{% endblock post_content %}
+    {% block post_content %}{% endblock post_content %}
 
-  {% include "components/footer.html" %}
+    {% include "components/footer.html" %}
+  
+  </body>
 
 </html>

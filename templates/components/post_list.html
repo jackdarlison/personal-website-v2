@@ -15,9 +15,11 @@
                 {{ post.date }}
             </p>
 
-            <!-- <div class="card-actions justify-end">
-                <div class="badge badge-accent">Test</div>
-            </div> -->
+            <div class="card-actions justify-end">
+                {% for tag in post.tags %}
+                    <div class="badge badge-accent">{{ tag }}</div>
+                {% endfor %}
+            </div>
 
         </div>
     </a>

@@ -6,4 +6,5 @@ pub struct Post {
     pub title: String,
     pub date: Date,
     pub body: String,
+    pub tags: Vec<String>,
 }
