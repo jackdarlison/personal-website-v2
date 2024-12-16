@@ -13,7 +13,8 @@ RUN mkdir -p ./src/bin && echo 'fn main() { println!("hello"); }' > ./src/main.r
 RUN cargo build --release
 RUN rm -rf ./src
 
-COPY . .
+COPY src/ src/
+COPY templates/ templates/
 
 # Force update modification times to make cargo rebuild them
 RUN touch -a -m ./src/main.rs

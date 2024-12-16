@@ -15,10 +15,14 @@ mod utils;
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
 
+    // tracing_subscriber::fmt()
+    //     .with_writer(rolling::daily("logs", "website.log"))
+    //     .with_max_level(Level::DEBUG)
+    //     .with_ansi(false)
+    //     .init();
+
     tracing_subscriber::fmt()
-        .with_writer(rolling::daily("logs", "website.log"))
         .with_max_level(Level::DEBUG)
-        .with_ansi(false)
         .init();
 
     // fetch the posts from the database
@@ -51,7 +55,7 @@ async fn main() -> anyhow::Result<()> {
     if !http_only {
         // rustls_acme is used to automatically generate certificates for HTTPS
         // https://github.com/FlorianUekermann/rustls-acme/blob/main/examples/low_level_axum.rs
-        let mut acme_state = AcmeConfig::new(["jackdarlison.uk"])
+        let mut acme_state = AcmeConfig::new([env::var("URL")?])
             .contact_push(format!("mailto:{}", env::var("EMAIL")?))
 
             .cache(DirCache::new("./acme_cache"))

@@ -1,8 +1,6 @@
-
+include $(PWD)/.env
 TAILWIND_INPUT=styles/tailwind.css
 TAILWIND_OUTPUT=static/main.css
-AWS_URL=ubuntu@ec2-3-9-146-191.eu-west-2.compute.amazonaws.com
-AWS_KEY=~/certs/aws-personal-website.pem
 
 build_and_deploy_local: build
 	docker-compose down || true
