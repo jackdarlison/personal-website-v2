@@ -1,9 +1,9 @@
     
-<div class="grid grid-cols-3 gap-4 my-8">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-8">
 
     {% for post in posts %}
 
-    <a class="card card-compact bg-neutral text-neutral-content no-underline shadow-xl transition-all hover:-translate-y-4" href="/post/{{ post.title }}">
+    <a class="card card-compact bg-neutral text-neutral-content no-underline shadow-xl transition-all hover:-translate-y-4" href="/blog/{{ post.title }}">
 
         <div class="card-body">
 

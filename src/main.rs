@@ -1,12 +1,11 @@
 use std::env;
 
 use axum::{routing::get, Router};
-use routes::{blog::blog, home::home, post::post, post_list::post_list};
+use routes::{asteroids::asteroids, blog::blog, home::home, post::post, post_list::post_list};
 use rustls_acme::{caches::DirCache, AcmeConfig};
 use tokio_stream::StreamExt;
 use tower_http::services::ServeDir;
-use tracing::{info, Level};
-use tracing_appender::rolling;
+use tracing::{error, info, Level};
 use utils::blog::{generate_posts, get_posts};
 
 mod routes;
@@ -14,12 +13,6 @@ mod utils;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-
-    // tracing_subscriber::fmt()
-    //     .with_writer(rolling::daily("logs", "website.log"))
-    //     .with_max_level(Level::DEBUG)
-    //     .with_ansi(false)
-    //     .init();
 
     tracing_subscriber::fmt()
         .with_max_level(Level::DEBUG)
@@ -32,14 +25,15 @@ async fn main() -> anyhow::Result<()> {
     }
 
     // define the website
-    let api_router = Router::new();
+    let hx_router = Router::new()
+        .route("/post_list", axum::routing::post(post_list));
 
     let router = Router::new()
         .route("/", get(home))
         .route("/blog", get(blog))
-        .route("/post/:title", get(post))
-        .route("/post_list", axum::routing::post(post_list))
-        .nest("api/", api_router)
+        .route("/blog/:title", get(post))
+        .route("/asteroids", get(asteroids))
+        .nest("/hx", hx_router)
         .nest_service("/static", ServeDir::new("static"));
     
     let http_addr: std::net::SocketAddr = "0.0.0.0:80".parse()?;
@@ -66,8 +60,8 @@ async fn main() -> anyhow::Result<()> {
         tokio::spawn(async move {
             loop {
                 match acme_state.next().await.unwrap() {
-                    Ok(ok) => println!("ACME event: {:?}", ok),
-                    Err(err) => eprintln!("ACME error: {:?}", err),
+                    Ok(ok) => info!("ACME event: {:?}", ok),
+                    Err(err) => error!("ACME error: {:?}", err),
                 }
             }
         });

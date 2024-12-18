@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Asteroids{% endblock title %}
+
+{% block content %}
+<div>
+    <canvas id="glcanvas" class="w-full h-full" tabindex='1'></canvas>
+    <script src="/static/mq_js_bundle-2.js"></script>
+    <script>load("/static/asteroids-wasm.wasm");</script>
+</div>
+<div class="justify-center flex gap-4 text-primary text-lg py-4">
+    <div>
+        <p>Rotate</p>
+        <div class="justify-center flex gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm2 0v14h14V5zm6 2h2a2 2 0 0 1 2 2v8h-2v-4h-2v4H9V9a2 2 0 0 1 2-2m0 2v2h2V9z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M9 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9zm2 2v6h2V9zM3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm2 0v14h14V5z" />
+            </svg>
+        </div>        
+    </div>
+    <div>
+        <p>Thrust</p>
+        <div class="justify-center flex">
+            <svg xmlns="http://www.w3.org/2000/svg" class="justify-center flex" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M9 17a2 2 0 0 1-2-2V7h2v8h2V8h2v7h2V7h2v8a2 2 0 0 1-2 2zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z" />
+            </svg>
+        </div>
+    </div>
+    <div>
+        <p>Flip</p>
+        <div class="justify-center flex">
+            <svg xmlns="http://www.w3.org/2000/svg" class="justify-center flex" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M11 7h4v2h-4v2h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H9v-2h4v-2h-2a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z" />
+            </svg>
+        </div>
+    </div>
+    <div>
+        <p>Shoot</p>
+        <div class="justify-center flex">
+            <svg xmlns="http://www.w3.org/2000/svg" class="justify-center flex" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M21 9a1 1 0 0 0-1 1v3H4v-3a1 1 0 0 0-2 0v4a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1" />
+            </svg>
+        </div>
+    </div>
+    <div>
+        <p>Restart</p>
+        <div class="justify-center flex">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+                    <path d="M44 44V4H24v16H4v24z" />
+                    <path d="m21 28l-4 4l4 4" />
+                    <path d="M34 23v9H17" />
+                </g>
+            </svg>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
