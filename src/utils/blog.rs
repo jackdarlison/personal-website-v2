@@ -50,9 +50,12 @@ pub async fn get_posts() -> anyhow::Result<Vec<Post>> {
         .connect(&db_url)
         .await?;
 
-    let posts = sqlx::query_as::<_, Post>("SELECT title, date, body, tags FROM posts")
+    let mut posts = sqlx::query_as::<_, Post>("SELECT title, date, body, tags FROM posts")
         .fetch_all(&pool)
         .await?;
+
+    posts.sort_by_key(|p| p.date);
+    posts.reverse();
 
     Ok(posts)
 }
