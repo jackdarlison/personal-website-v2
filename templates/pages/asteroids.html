@@ -8,51 +8,65 @@
     <script src="/static/mq_js_bundle-2.js"></script>
     <script>load("/static/asteroids-wasm.wasm");</script>
 </div>
-<div class="justify-center flex gap-4 text-primary text-lg pt-4 pb-6">
-    <div>
-        <p>Rotate</p>
-        <div class="justify-center flex gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm2 0v14h14V5zm6 2h2a2 2 0 0 1 2 2v8h-2v-4h-2v4H9V9a2 2 0 0 1 2-2m0 2v2h2V9z" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M9 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9zm2 2v6h2V9zM3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm2 0v14h14V5z" />
-            </svg>
-        </div>        
+
+<div class="max-w-full flex justify-between gap-4 py-4">
+    <div class="flex gap-4">
+        <button class="key-button btn btn-outline btn-primary" data-key="KeyA">
+            <p>Rotate Left</p>
+            <div class="justify-center flex">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm2 0v14h14V5zm6 2h2a2 2 0 0 1 2 2v8h-2v-4h-2v4H9V9a2 2 0 0 1 2-2m0 2v2h2V9z" />
+                </svg>
+            </div>        
+        </button>
+        <button class="key-button btn btn-outline btn-primary" data-key="KeyD">
+            <p>Rotate Right</p>
+            <div class="justify-center flex">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M9 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9zm2 2v6h2V9zM3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm2 0v14h14V5z" />
+                </svg>
+            </div>        
+        </button>
     </div>
-    <div>
-        <p>Thrust</p>
-        <div class="justify-center flex">
-            <svg xmlns="http://www.w3.org/2000/svg" class="justify-center flex" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M9 17a2 2 0 0 1-2-2V7h2v8h2V8h2v7h2V7h2v8a2 2 0 0 1-2 2zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z" />
-            </svg>
-        </div>
+
+    <div class="flex gap-4">
+        <button class="key-button btn btn-outline btn-primary" data-key="KeyW">
+            <p>Thrust</p>
+            <div class="justify-center flex">
+                <svg xmlns="http://www.w3.org/2000/svg" class="justify-center flex" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M9 17a2 2 0 0 1-2-2V7h2v8h2V8h2v7h2V7h2v8a2 2 0 0 1-2 2zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z" />
+                </svg>
+            </div>
+        </button>
+        <button class="key-button btn btn-outline btn-primary" data-key="Space">
+            <p>Shoot</p>
+            <div class="justify-center flex">
+                <svg xmlns="http://www.w3.org/2000/svg" class="justify-center flex" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M21 9a1 1 0 0 0-1 1v3H4v-3a1 1 0 0 0-2 0v4a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1" />
+                </svg>
+            </div>
+        </button>
     </div>
-    <div>
+</div>
+
+<div class="justify-center flex gap-4 py-4">
+    <button class="key-button btn btn-outline btn-primary" data-key="KeyS">
         <p>Flip</p>
         <div class="justify-center flex">
             <svg xmlns="http://www.w3.org/2000/svg" class="justify-center flex" width="1.2em" height="1.2em" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M11 7h4v2h-4v2h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H9v-2h4v-2h-2a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z" />
             </svg>
         </div>
-    </div>
-    <div>
-        <p>Shoot</p>
-        <div class="justify-center flex">
-            <svg xmlns="http://www.w3.org/2000/svg" class="justify-center flex" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M21 9a1 1 0 0 0-1 1v3H4v-3a1 1 0 0 0-2 0v4a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1" />
-            </svg>
-        </div>
-    </div>
-    <div>
+    </button>
+    <button class="key-button btn btn-outline btn-primary" data-key="ShiftLeft">
         <p>Hyperspace</p>
         <div class="justify-center flex">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M8 17v-4H5.1q-.65 0-.912-.562t.137-1.063l6.9-8.425q.3-.375.775-.375t.775.375l6.9 8.425q.4.5.138 1.063T18.9 13H16v4q0 .425-.288.713T15 18H9q-.425 0-.712-.288T8 17m2-1h4v-5h2.775L12 5.15L7.225 11H10zm-5 6q-.425 0-.712-.288T4 21t.288-.712T5 20h14q.425 0 .713.288T20 21t-.288.713T19 22z" />
             </svg>
         </div>
-    </div>
-    <div>
+    </button>
+    <button class="key-button btn btn-outline btn-primary" data-key="Enter">
         <p>Restart</p>
         <div class="justify-center flex">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 48 48">
@@ -63,6 +77,57 @@
                 </g>
             </svg>
         </div>
-    </div>
+    </button>
 </div>
+
+<script>
+    const game_canvas = document.getElementById('glcanvas');
+
+    function sendKeyDown(key) {
+        const event = new KeyboardEvent('keydown', { code: key, bubbles: true });
+        game_canvas.dispatchEvent(event);
+    }
+    
+    function sendKeyUp(key) {
+        const event = new KeyboardEvent('keyup', { code: key, bubbles: true });
+        game_canvas.dispatchEvent(event);
+    }
+
+    let max_width = 0;
+
+    document.querySelectorAll('.key-button').forEach(button => {
+        max_width = Math.max(max_width, button.offsetWidth);
+
+        const key = button.dataset.key;
+
+        button.addEventListener('mousedown', () => sendKeyDown(key));
+        button.addEventListener('mouseup', () => sendKeyUp(key));
+        button.addEventListener('mouseleave', () => sendKeyUp(key));
+        button.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            sendKeyDown(key);
+        });
+        button.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            sendKeyUp(key);
+        });
+        button.addEventListener('touchleave', (e) => {
+            e.preventDefault();
+            sendKeyUp(key);
+        });
+        button.addEventListener('touchcancel', (e) => {
+            e.preventDefault();
+            sendKeyUp(key);
+        });
+    });
+    
+    max_width++;
+
+    document.querySelectorAll('.key-button').forEach(button => {
+        button.style.width = `${max_width}px`;
+    });
+    
+    window.sendKeyDown = sendKeyDown;
+    window.sendKeyUp = sendKeyUp;
+</script>
 {% endblock content %}
