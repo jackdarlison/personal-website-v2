@@ -1,9 +1,6 @@
-use std::sync::Arc;
 
 use askama::Template;
-use axum::{extract::State, response::IntoResponse};
-
-use crate::utils::post::Post;
+use axum::response::IntoResponse;
 
 #[derive(Template)]
 #[template(path = "pages/blog.html")]

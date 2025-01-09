@@ -4,6 +4,7 @@
 
 /static/main.css
 /static/images
+/static/data
 
 .env
 

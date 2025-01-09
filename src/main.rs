@@ -1,7 +1,7 @@
 use std::env;
 
 use axum::{routing::get, Router};
-use routes::{asteroids::asteroids, blog::blog, home::home, post::post, post_list::post_list};
+use routes::{asteroids::asteroids, blog::blog, games::games, home::home, post::post, post_list::post_list};
 use rustls_acme::{caches::DirCache, AcmeConfig};
 use tokio_stream::StreamExt;
 use tower_http::services::ServeDir;
@@ -28,11 +28,15 @@ async fn main() -> anyhow::Result<()> {
     let hx_router = Router::new()
         .route("/post_list", axum::routing::post(post_list));
 
+    let games_router = Router::new()
+        .route("/", get(games))
+        .route("/asteroids", get(asteroids));
+
     let router = Router::new()
         .route("/", get(home))
         .route("/blog", get(blog))
         .route("/blog/:title", get(post))
-        .route("/asteroids", get(asteroids))
+        .nest("/games", games_router)
         .nest("/hx", hx_router)
         .nest_service("/static", ServeDir::new("static"));
     
