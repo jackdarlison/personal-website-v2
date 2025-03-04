@@ -28,7 +28,7 @@ save:
 	gzip -f db.tar
 
 tailwind:
-	pnpm dlx tailwindcss -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT)
+	npx tailwindcss -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT)
 
 clean:
 	cargo clean
