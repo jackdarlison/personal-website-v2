@@ -6,7 +6,7 @@ use axum::{
     response::IntoResponse,
 };
 
-use crate::utils::{blog::get_posts, post::Post};
+use crate::{routes::error404::Error404, utils::{blog::get_posts, post::Post}};
 
 #[derive(Template)]
 #[template(path = "pages/post.html")]
@@ -25,7 +25,7 @@ pub(crate) async fn post(
     };
 
     match posts.into_iter().filter(|post| post.title == title).next() {
-        None => (StatusCode::NOT_FOUND, "404 not found").into_response(),
+        None => Error404 {}.into_response(),
         Some(post) => {
             PostTemplate { post }.into_response()
         }

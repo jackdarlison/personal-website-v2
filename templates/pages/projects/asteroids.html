@@ -3,13 +3,20 @@
 {% block title %}Asteroids{% endblock title %}
 
 {% block content %}
-<div>
+<div class="prose md:prose-lg mx-auto">
+    <h1> Asteroids. </h1>
+
+    <p>My take on the classic arcade game Asteroids. Compiled to WASM so you can enjoy it here! Currently not the best experience on a phone.</p>
+</div>
+
+
+<div class="py-4">
     <canvas id="glcanvas" class="w-full aspect-[4/3]" tabindex='1'></canvas>
-    <script src="/static/mq_js_bundle-2.js"></script>
+    <script src="/static/mq_js_bundle-4-13.js"></script>
     <script>load("/static/asteroids-wasm.wasm");</script>
 </div>
 
-<div class="max-w-full flex justify-center gap-4 pt-4">
+<div class="max-w-full flex justify-center gap-4">
     <button class="key-button btn btn-sm md:btn-md btn-outline btn-primary" data-key="KeyA">
         <p>Rotate Left</p>
         <div class="justify-center flex">

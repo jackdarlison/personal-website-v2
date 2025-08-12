@@ -1,15 +1,20 @@
 use std::env;
 
-use axum::{routing::get, Router};
-use routes::{asteroids::asteroids, blog::blog, games::games, home::home, post::post, post_list::post_list};
+use askama::Template;
+use axum::{routing::get, Router, response::IntoResponse};
+use routes::{asteroids::asteroids, blog::blog, projects::projects, home::home, post::post, post_list::post_list};
 use rustls_acme::{caches::DirCache, AcmeConfig};
 use tokio_stream::StreamExt;
 use tower_http::services::ServeDir;
 use tracing::{error, info, Level};
 use utils::blog::{generate_posts, get_posts};
 
+use crate::routes::life::life;
+
 mod routes;
 mod utils;
+
+
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -28,17 +33,19 @@ async fn main() -> anyhow::Result<()> {
     let hx_router = Router::new()
         .route("/post_list", axum::routing::post(post_list));
 
-    let games_router = Router::new()
-        .route("/", get(games))
-        .route("/asteroids", get(asteroids));
+    let projects_router = Router::new()
+        .route("/", get(projects))
+        .route("/asteroids", get(asteroids))
+        .route("/life", get(life));
 
     let router = Router::new()
         .route("/", get(home))
         .route("/blog", get(blog))
         .route("/blog/:title", get(post))
-        .nest("/games", games_router)
+        .nest("/projects", projects_router)
         .nest("/hx", hx_router)
-        .nest_service("/static", ServeDir::new("static"));
+        .nest_service("/static", ServeDir::new("static"))
+        .fallback(routes::error404::handle_404);
     
     let http_addr: std::net::SocketAddr = "0.0.0.0:80".parse()?;
 
