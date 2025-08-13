@@ -6,3 +6,4 @@ pub mod asteroids;
 pub mod projects;
 pub mod error404;
 pub mod life;
+pub mod cellular_automaton;

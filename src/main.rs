@@ -9,7 +9,7 @@ use tower_http::services::ServeDir;
 use tracing::{error, info, Level};
 use utils::blog::{generate_posts, get_posts};
 
-use crate::routes::life::life;
+use crate::routes::{cellular_automaton::cellular_automaton, life::life};
 
 mod routes;
 mod utils;
@@ -36,6 +36,7 @@ async fn main() -> anyhow::Result<()> {
     let projects_router = Router::new()
         .route("/", get(projects))
         .route("/asteroids", get(asteroids))
+        .route("/cellular_automaton", get(cellular_automaton))
         .route("/life", get(life));
 
     let router = Router::new()

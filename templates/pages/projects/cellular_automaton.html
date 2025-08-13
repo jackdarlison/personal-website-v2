@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Cellular Automaton{% endblock title %}
+
+{% block content %}
+<div class="prose md:prose-lg mx-auto">
+    <h1> Cellular Automaton. </h1>
+
+    <p> A cellular automaton simulator. Left click will add the currently selected cell shown in the bottom left. The config menu can be used to configure the simulation and pick from different rulesets. You can also create your own ruleset in JSON. You can still explore the previous version available <a href="/projects/life">here</a>.</p>
+</div>
+
+
+<div class="my-4 border-neutral border-2">
+    <canvas id="glcanvas" class="w-full aspect-[4/3]" tabindex='1'></canvas>
+    <script src="/static/mq_js_bundle-4-13.js"></script>
+    <script>load("/static/cellular-automaton.wasm");</script>
+</div>
+
+
+<div class="max-w-full flex justify-center gap-4">
+    <button class="key-button btn btn-sm md:btn-md btn-outline btn-primary" data-key="KeyQ">
+        <p>Config</p>
+        <div class="justify-center flex">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                    <path d="M15 16v-6a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2zm0 0l-2-2m2 2l.5.5" />
+                    <path d="M3 9.4c0-2.24 0-3.36.436-4.216a4 4 0 0 1 1.748-1.748C6.04 3 7.16 3 9.4 3h5.2c2.24 0 3.36 0 4.216.436a4 4 0 0 1 1.748 1.748C21 6.04 21 7.16 21 9.4v5.2c0 2.24 0 3.36-.436 4.216a4 4 0 0 1-1.748 1.748C17.96 21 16.84 21 14.6 21H9.4c-2.24 0-3.36 0-4.216-.436a4 4 0 0 1-1.748-1.748C3 17.96 3 16.84 3 14.6z" />
+                </g>
+            </svg>
+        </div>        
+    </button>
+    <button class="key-button btn btn-sm md:btn-md btn-outline btn-primary" data-key="Space">
+        <p>Pause</p>
+        <div class="justify-center flex">
+            <svg xmlns="http://www.w3.org/2000/svg" class="justify-center flex" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M21 9a1 1 0 0 0-1 1v3H4v-3a1 1 0 0 0-2 0v4a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1" />
+            </svg>
+        </div>
+    </button>
+</div>
+
+<div class="max-w-full flex justify-center gap-4 pt-4">
+    <button class="key-button btn btn-sm md:btn-md btn-outline btn-primary" data-key="KeyW">
+        <p>Previous State</p>
+        <div class="justify-center flex">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                    <path d="M9 8v8l3-4l3 4V8" />
+                    <path d="M3 9.4c0-2.24 0-3.36.436-4.216a4 4 0 0 1 1.748-1.748C6.04 3 7.16 3 9.4 3h5.2c2.24 0 3.36 0 4.216.436a4 4 0 0 1 1.748 1.748C21 6.04 21 7.16 21 9.4v5.2c0 2.24 0 3.36-.436 4.216a4 4 0 0 1-1.748 1.748C17.96 21 16.84 21 14.6 21H9.4c-2.24 0-3.36 0-4.216-.436a4 4 0 0 1-1.748-1.748C3 17.96 3 16.84 3 14.6z" />
+                </g>
+            </svg>
+        </div>
+    </button>
+    <button class="key-button btn btn-sm md:btn-md btn-outline btn-primary" data-key="KeyE">
+        <p>Next State</p>
+        <div class="justify-center flex">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                    <path d="M14.5 8h-5v4m5 4h-5v-4m0 0h4" />
+                    <path d="M3 9.4c0-2.24 0-3.36.436-4.216a4 4 0 0 1 1.748-1.748C6.04 3 7.16 3 9.4 3h5.2c2.24 0 3.36 0 4.216.436a4 4 0 0 1 1.748 1.748C21 6.04 21 7.16 21 9.4v5.2c0 2.24 0 3.36-.436 4.216a4 4 0 0 1-1.748 1.748C17.96 21 16.84 21 14.6 21H9.4c-2.24 0-3.36 0-4.216-.436a4 4 0 0 1-1.748-1.748C3 17.96 3 16.84 3 14.6z" />
+                </g>
+            </svg>
+        </div>
+    </button>
+</div>
+
+<script src="/static/key_controls.js"></script>
+{% endblock content %}
