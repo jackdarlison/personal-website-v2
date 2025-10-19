@@ -1,0 +1,6 @@
+@import "tailwindcss" source(none);
+@source "./templates/**/*.html";
+@plugin "daisyui" {
+  themes: coffee --default --prefersdark, abyss, fantasy, emerald, cmyk, lemonade, forest;
+}
+@plugin "@tailwindcss/typography";

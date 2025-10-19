@@ -1,6 +1,4 @@
 include $(PWD)/.env
-TAILWIND_INPUT=styles/tailwind.css
-TAILWIND_OUTPUT=static/main.css
 
 build_and_deploy_local: build
 	docker-compose down || true
@@ -16,7 +14,7 @@ deploy:
 	ssh -i $(AWS_KEY) $(AWS_URL) "cd ~/website/ && docker load < db.tar.gz"
 	ssh -i $(AWS_KEY) $(AWS_URL) "cd ~/website/ && docker-compose up"
 
-build: tailwind
+build:
 	mkdir -p app
 	docker build -f dockerfile.website -t website .
 	docker build -f dockerfile.db -t db .
@@ -27,9 +25,5 @@ save:
 	gzip -f website.tar
 	gzip -f db.tar
 
-tailwind:
-	npx tailwindcss -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT)
-
 clean:
 	cargo clean
-	rm $(TAILWIND_OUTPUT)

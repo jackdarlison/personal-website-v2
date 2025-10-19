@@ -4,17 +4,13 @@
 
 {% block content %}
 
-<div class="prose md:prose-lg mx-auto">
+<div class="prose md:prose-lg">
     <h1> Blog. </h1>
 
     <p>
-        Here you can find a collection of my projects and thoughts.
-    </p>
-    
-    <p>
         Search for something specific:
         <div class="flex">
-            <input class="form-control" type="search" 
+            <input class="form-control bg-base-200 p-0.5 rounded-md" type="search" 
             name="contains" placeholder="Filter Posts..." 
             hx-post="hx/post_list" 
             hx-trigger="input changed delay:100ms, search, load" 

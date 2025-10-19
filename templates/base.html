@@ -1,21 +1,24 @@
 <!doctype html>
-<html data-theme="forest" lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/main.css" >
-    <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
+<html lang="en">
 
-    <title>{% block title %}{% endblock title %}</title>
-  </head>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/main.css">
+  <script src="https://unpkg.com/htmx.org@2.0.3"
+    integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq"
+    crossorigin="anonymous"></script>
 
-  <body class="container mx-auto max-w-full md:max-w-3xl px-4 md:px-8" >
+  <title>{% block title %}{% endblock title %}</title>
+</head>
 
-    {% include "components/tablist.html" %}
+<body class="container mx-auto max-w-full md:max-w-3xl px-4 md:px-8">
 
-    {% block content %}{% endblock content %}
-    
-    {% include "components/footer.html" %}
-  
-  </body>
+  {% include "components/tablist.html" %}
+
+  {% block content %}{% endblock content %}
+
+  {% include "components/footer.html" %}
+
+</body>
 
 </html>
