@@ -7,13 +7,13 @@ build_and_deploy_local: build
 build_and_deploy: build save deploy
 
 deploy:
-	ssh -i $(AWS_KEY) $(AWS_URL) "mkdir -p ~/website/"
-	ssh -i $(AWS_KEY) $(AWS_URL) "cd ~/website/ && (docker-compose down || true)"
-	scp -i $(AWS_KEY) website.tar.gz db.tar.gz .env compose.yaml $(AWS_URL):~/website/
-	ssh -i $(AWS_KEY) $(AWS_URL) "cd ~/website/ && docker load < website.tar.gz"
-	ssh -i $(AWS_KEY) $(AWS_URL) "cd ~/website/ && docker load < db.tar.gz"
-	ssh -i $(AWS_KEY) $(AWS_URL) "cd ~/website/ && rm *.tar.gz"
-	ssh -i $(AWS_KEY) $(AWS_URL) "cd ~/website/ && docker-compose up"
+	ssh $(SERVER_URL) "mkdir -p ~/website/"
+	ssh $(SERVER_URL) "cd ~/website/ && (docker compose down || true)"
+	scp website.tar.gz db.tar.gz .env compose.yaml $(SERVER_URL):~/website/
+	ssh $(SERVER_URL) "cd ~/website/ && docker load < website.tar.gz"
+	ssh $(SERVER_URL) "cd ~/website/ && docker load < db.tar.gz"
+	ssh $(SERVER_URL) "cd ~/website/ && rm *.tar.gz"
+	ssh $(SERVER_URL) "cd ~/website/ && docker compose up"
 
 build:
 	mkdir -p app
