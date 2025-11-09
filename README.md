@@ -1,6 +1,6 @@
 # Personal Website
 
-A simple website for hosting blog posts
+A simple website for hosting blog posts. This project has been depreciated and will no longer be updated. 
 
 ## Environment Variables
 
